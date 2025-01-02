@@ -2,9 +2,11 @@ import React from 'react';
 import {Navigate, Outlet} from "react-router-dom";
 import {Forms, LayoutContainer, LayoutImage} from "./form/Form.styled";
 import {images} from "../../constant/index"
+import {useSelector} from "react-redux";
 function AuthLayout(props) {
-  // const currentUser = false
-  const isAuthenticated = false;
+  const { currentUser } = useSelector((state) => state.user);
+
+  const isAuthenticated = currentUser;
   console.log(isAuthenticated)
   return (
     <>
