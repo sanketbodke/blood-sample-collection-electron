@@ -1,12 +1,14 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
+import Home from "../pages/Home/home";
+import {useSelector} from "react-redux";
 
 function PrivateRoute() {
-  const currentUser = false;
+  const { currentUser } = useSelector((state) => state.user)
 
   return currentUser ? (
     <>
-      <p>Home</p>
+      <Home />
     </>
   ) : (
     <Navigate to="/auth/login" />
