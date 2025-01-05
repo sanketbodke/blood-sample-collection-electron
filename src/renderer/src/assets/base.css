@@ -71,6 +71,7 @@ body {
   --white-color: #FFFFFF;
   --red-color: #FF0000FF;
   --success-color: #5be85b;
+  --bg-color: #f3f5f6;
 
   --large-heading: 32px;
   --medium-heading: 30px;
@@ -359,4 +360,17 @@ button{
   .lab-list-table {
     font-size: 14px;
   }
+}
+
+.dashboard_layout{
+  display: flex;
+  gap: 30px;
+}
+
+.pages_layout{
+  padding: 30px;
+  background-color: var(--white-color);
+  box-shadow: 0 1px 4px rgb(146 161 176 / 35%);
+  border-radius: 30px;
+  width: 100%;
 }
