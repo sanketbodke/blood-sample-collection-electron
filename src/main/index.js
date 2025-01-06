@@ -2,6 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import axios from "axios";
 
 function createWindow() {
   // Create the browser window.
@@ -13,12 +14,14 @@ function createWindow() {
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      contextIsolation: true,
     }
   })
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
+    mainWindow.webContents.openDevTools()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -60,6 +63,58 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
 })
+
+// agents api
+ipcMain.handle('get-agents', async (event, { apiToGetAgents, token }) => {
+  try {
+    const agents = await axios.get(apiToGetAgents, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return agents.data;
+  } catch (error) {
+    console.error('Error fetching agents:', error);
+  }
+});
+
+ipcMain.handle('create-agent', async (event, { apiToCreateAgent, agentData, token }) => {
+  try {
+    const response = await axios.post(apiToCreateAgent, agentData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating agent:', error);
+  }
+});
+
+ipcMain.handle('update-agent', async (event, { apiToUpdateAgent, agentData, token }) => {
+  try {
+    const response = await axios.put(apiToUpdateAgent, agentData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error updating agent:', error);
+  }
+});
+
+ipcMain.handle('delete-agent', async (event, { apiToDeleteAgent, token }) => {
+  try {
+    const response = await axios.delete(apiToDeleteAgent, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.error('Error deleting agent:', error);
+  }
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

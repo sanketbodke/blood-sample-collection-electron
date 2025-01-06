@@ -1,5 +1,4 @@
-import { contextBridge } from 'electron'
-import { electronAPI } from '@electron-toolkit/preload'
+import { contextBridge, ipcRenderer } from 'electron';
 
 // Custom APIs for renderer
 const api = {}
@@ -9,12 +8,19 @@ const api = {}
 // just add to the DOM global.
 if (process.contextIsolated) {
   try {
-    contextBridge.exposeInMainWorld('electron', electronAPI)
-    contextBridge.exposeInMainWorld('api', api)
+    contextBridge.exposeInMainWorld('api', {
+      ...api,
+      getAgents: (apiToGetAgents, token) => ipcRenderer.invoke('get-agents', { apiToGetAgents, token }),
+      createAgent: (apiToCreateAgent, agentData, token) => ipcRenderer.invoke('create-agent', { apiToCreateAgent, agentData ,token }),
+      updateAgent: (apiToUpdateAgent, agentData, token) => ipcRenderer.invoke('update-agent', { apiToUpdateAgent, agentData, token }),
+      deleteAgent: (apiToDeleteAgent, token) => ipcRenderer.invoke('delete-agent', { apiToDeleteAgent, token }),
+    });
   } catch (error) {
-    console.error(error)
+    console.error("Error exposing APIs:", error);
   }
 } else {
-  window.electron = electronAPI
-  window.api = api
+  window.api = {
+    ...api,
+    getAgents: (apiToGetAgents, token) => ipcRenderer.invoke('get-agents', { apiToGetAgents, token }),
+  };
 }
