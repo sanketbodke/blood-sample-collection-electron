@@ -11,6 +11,7 @@ const apiUrls = {
   // agents
   createAndGetAgents: `${baseUrl}/agents`,
   updateAndDeleteAgents: `${baseUrl}/agents/:id`,
+  getAgentById: `${baseUrl}/agents/:id`,
 };
 
 export default apiUrls;

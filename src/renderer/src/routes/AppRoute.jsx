@@ -6,6 +6,11 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "../pages/Home/home";
 import Profile from "../pages/profile/Profile.component";
 import ResetPassword from "../components/ResetPassword/ResetPassword.component";
+// agents
+
+import ListAgents from "../pages/agent/listAgents/listAgents";
+import CreateAgent from "../pages/agent/createAgent/createAgent";
+import UpdateAgent from "../pages/agent/updateAgent/updateAgent";
 
 function AppRoute() {
   return(
@@ -19,6 +24,9 @@ function AppRoute() {
         <Route path="/" element={<Home />} />
         <Route path="user/profile" element={<Profile />} />
         <Route path="user/password/reset" element={<ResetPassword />} />
+        <Route path="/agents" element={<ListAgents />}/>
+        <Route path="/agents/new" element={<CreateAgent />}/>
+        <Route path="/agents/edit/:id" element={<UpdateAgent />}/>
       </Route>
     </Routes>
   )

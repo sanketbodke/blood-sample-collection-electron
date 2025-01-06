@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import currentUser from "../../utils/user";
-
 function Home() {
   const {
     user
