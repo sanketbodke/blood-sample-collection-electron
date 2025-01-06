@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 `
 export const Form = styled.form`
   display: flex;
@@ -13,7 +13,7 @@ export const FormHeading = styled.h1`
   color: var(--primary-color);
   font-size: var(--large-text);
   font-weight: 500;
-  margin: 30px 0;
+  margin-bottom: 30px;
 `
 
 export const FormFiledGroup = styled.div`

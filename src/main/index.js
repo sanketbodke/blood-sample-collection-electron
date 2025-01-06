@@ -80,12 +80,12 @@ ipcMain.handle('get-agents', async (event, { apiToGetAgents, token }) => {
 
 ipcMain.handle('create-agent', async (event, { apiToCreateAgent, agentData, token }) => {
   try {
-    const response = await axios.post(apiToCreateAgent, agentData, {
+    const newAgent = await axios.post(apiToCreateAgent, agentData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data;
+    return newAgent.data;
   } catch (error) {
     console.error('Error creating agent:', error);
   }
@@ -93,12 +93,12 @@ ipcMain.handle('create-agent', async (event, { apiToCreateAgent, agentData, toke
 
 ipcMain.handle('update-agent', async (event, { apiToUpdateAgent, agentData, token }) => {
   try {
-    const response = await axios.put(apiToUpdateAgent, agentData, {
+    const updatedAgent = await axios.put(apiToUpdateAgent, agentData, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response.data;
+    return updatedAgent.data;
   } catch (error) {
     console.error('Error updating agent:', error);
   }
@@ -106,7 +106,7 @@ ipcMain.handle('update-agent', async (event, { apiToUpdateAgent, agentData, toke
 
 ipcMain.handle('delete-agent', async (event, { apiToDeleteAgent, token }) => {
   try {
-    const response = await axios.delete(apiToDeleteAgent, {
+    const deletedAgent = await axios.delete(apiToDeleteAgent, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

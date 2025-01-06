@@ -8,7 +8,7 @@ import {
   FormHeading,
   FormFiledGroup, FormSubmitButton
 } from "../../../style/Form.styled";
-import {useParams} from "react-router-dom";
+import BackPageButton from "../../../components/BackPageButton/BackPageButton.component";
 
 const UpdateAgent = ({ agentData }) => {
   const {
@@ -20,6 +20,9 @@ const UpdateAgent = ({ agentData }) => {
   return (
     <FormContainer>
       <PagesHeading heading="Update Agent" />
+      <BackPageButton
+        backLink="/agents"
+      />
       <Form onSubmit={handleSubmit}>
         <FormHeading>Agent Information</FormHeading>
         <FormFiledGroup>

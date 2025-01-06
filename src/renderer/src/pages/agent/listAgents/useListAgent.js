@@ -1,27 +1,23 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import apiUrl from "../../../constant/apiUrl";
 import currentUser from "../../../utils/user";
-import {useState} from "react";
-import {message} from "antd";
-import {useNavigate} from "react-router-dom";
+import { useState } from "react";
+import { message } from "antd";
 
 const useListAgent = () => {
-  const navigateTo = useNavigate();
+  const queryClient = useQueryClient();
   const { user } = currentUser();
 
-  const [tableHeaders, _] = useState([
+  const [tableHeaders] = useState([
     "Name",
     "Email",
     "Phone",
     "Address",
     "Actions"
-  ])
-
-  const [tableData, setTableData] = useState([])
+  ]);
 
   const AllAgents = async () => {
     const agents = await window.api.getAgents(`${apiUrl.createAndGetAgents}`, user.token);
-    setTableData(agents?.agents)
     return agents?.agents;
   };
 
@@ -37,31 +33,26 @@ const useListAgent = () => {
 
   const handleDelete = async (agentId) => {
     try {
-      const agent = await window.api.deleteAgent(
+      await window.api.deleteAgent(
         `${apiUrl.updateAndDeleteAgents.replace(":id", agentId)}`,
         user?.token
       );
-      if (agent) {
-        navigateTo("/agents");
-        message.info("Agent Deleted");
-      }
-    } catch (error) {
-      console.error("Error deleting agent:", error);
-      alert("Failed to delete the agent");
+      queryClient.invalidateQueries(['agents']);
+      message.info("Agent Deleted");
+    } catch {
+      message.error("Failed to delete the agent");
     }
   };
 
-  return{
-    user,
-    AllAgents,
+  return {
     data,
     error,
     isLoading,
     isError,
     tableHeaders,
-    tableData,
+    tableData: data || [],
     handleDelete
-  }
-}
+  };
+};
 
-export default useListAgent
+export default useListAgent;

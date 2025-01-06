@@ -8,6 +8,7 @@ import {
   FormHeading,
   FormFiledGroup, FormSubmitButton
 } from "../../../style/Form.styled";
+import BackPageButton from "../../../components/BackPageButton/BackPageButton.component";
 const CreateAgent = () => {
   const {
     register,
@@ -18,6 +19,9 @@ const CreateAgent = () => {
     <FormContainer>
       <PagesHeading
         heading="Create Agent"
+      />
+      <BackPageButton
+        backLink="/agents"
       />
       <Form onSubmit={handleSubmit}>
         <FormHeading>

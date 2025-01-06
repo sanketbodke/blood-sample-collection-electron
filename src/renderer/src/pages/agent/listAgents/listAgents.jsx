@@ -24,6 +24,8 @@ const ListAgents = () => {
     return <div>No agents found</div>;
   }
 
+  console.log(data)
+
   return (
     <div>
       <PagesHeading
