@@ -48,7 +48,7 @@ const Sidebar= () => {
               <>
                 <MenuItem><Link to="/">Patient Samples</Link></MenuItem>
                 <MenuItem><Link to="/agents">Manage Agents</Link></MenuItem>
-                <MenuItem><Link to="/">Service Map</Link></MenuItem>
+                <MenuItem><Link to="/service-map">Service Map</Link></MenuItem>
                 <MenuItem><Link to="/">Manage Reports</Link></MenuItem>
               </>
             )}
