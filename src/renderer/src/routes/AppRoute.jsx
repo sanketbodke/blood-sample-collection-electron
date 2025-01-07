@@ -13,7 +13,7 @@ import CreateAgent from "../pages/agent/createAgent/createAgent";
 import UpdateAgent from "../pages/agent/updateAgent/updateAgent";
 
 // service map
-import ServiceMap from "../pages/agent/serviceMap/serviceMap";
+import ServiceMap from "../pages/serviceMap/serviceMap";
 
 function AppRoute() {
   return(

@@ -1,5 +1,5 @@
-import apiUrl from "../../../constant/apiUrl";
-import currentUser from "../../../utils/user";
+import apiUrl from "../../constant/apiUrl";
+import currentUser from "../../utils/user";
 import axios from "axios";
 import {useEffect, useRef, useState} from "react";
 const useServiceMap = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import useServiceMap from "./useServiceMap";
 import {ServiceMapContainer, ServiceMapView} from "./serviceMap.styled";
-import PagesHeading from "../../../components/PagesHeading/PagesHeading.component";
+import PagesHeading from "../../components/PagesHeading/PagesHeading.component";
 
 const ServiceMap = () => {
   const {
