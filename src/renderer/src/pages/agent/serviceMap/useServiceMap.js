@@ -27,8 +27,6 @@ const useServiceMap = () => {
   }, [user?.token]);
 
   useEffect(() => {
-    if (!mapRef.current || addresses.length === 0) return;
-
     const initMap = () => {
       const center = { lat: 19.5937, lng: 74.9629 };
       const map = new window.google.maps.Map(mapRef.current, {
