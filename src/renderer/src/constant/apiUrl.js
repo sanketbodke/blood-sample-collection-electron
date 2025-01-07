@@ -12,6 +12,9 @@ const apiUrls = {
   createAndGetAgents: `${baseUrl}/agents`,
   updateAndDeleteAgents: `${baseUrl}/agents/:id`,
   getAgentById: `${baseUrl}/agents/:id`,
+
+  // service map
+  serviceMap: `${baseUrl}/service_maps`,
 };
 
 export default apiUrls;

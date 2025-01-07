@@ -12,6 +12,9 @@ import ListAgents from "../pages/agent/listAgents/listAgents";
 import CreateAgent from "../pages/agent/createAgent/createAgent";
 import UpdateAgent from "../pages/agent/updateAgent/updateAgent";
 
+// service map
+import ServiceMap from "../pages/agent/serviceMap/serviceMap";
+
 function AppRoute() {
   return(
     <Routes>
@@ -27,6 +30,8 @@ function AppRoute() {
         <Route path="/agents" element={<ListAgents />}/>
         <Route path="/agents/new" element={<CreateAgent />}/>
         <Route path="/agents/edit/:id" element={<UpdateAgent />}/>
+
+        <Route path="/service-map" element={<ServiceMap />}/>
       </Route>
     </Routes>
   )

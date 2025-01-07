@@ -18,6 +18,7 @@ const useListAgent = () => {
 
   const AllAgents = async () => {
     const agents = await window.api.getAgents(`${apiUrl.createAndGetAgents}`, user.token);
+    console.log(agents)
     return agents?.agents;
   };
 
