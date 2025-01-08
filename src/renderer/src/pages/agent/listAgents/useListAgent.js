@@ -6,7 +6,9 @@ import { message } from "antd";
 
 const useListAgent = () => {
   const queryClient = useQueryClient();
-  const { user } = currentUser();
+  const {
+    user
+  } = currentUser();
 
   const [tableHeaders] = useState([
     "Name",

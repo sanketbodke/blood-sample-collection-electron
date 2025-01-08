@@ -34,6 +34,7 @@ const ListAgents = () => {
       <Table
         tableHeaders={tableHeaders}
         tableData={tableData}
+        dataFor="listAgents"
       />
     </div>
   );

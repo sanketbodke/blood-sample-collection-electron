@@ -40,13 +40,13 @@ const Sidebar= () => {
           <MenuItems>
             {userProfileDetails.role === "patient" ? (
               <>
-                <MenuItem><Link to="/">Schedule Appointment</Link></MenuItem>
-                <MenuItem><Link to="/">Service Map</Link></MenuItem>
+                <MenuItem><Link to="/patient/appointments">Appointment</Link></MenuItem>
+                <MenuItem><Link to="/service-map">Service Map</Link></MenuItem>
                 <MenuItem><Link to="/">Contact Us</Link></MenuItem>
               </>
             ) : (
               <>
-                <MenuItem><Link to="/">Patient Samples</Link></MenuItem>
+                <MenuItem><Link to="/patient/samples">Patient Samples</Link></MenuItem>
                 <MenuItem><Link to="/agents">Manage Agents</Link></MenuItem>
                 <MenuItem><Link to="/service-map">Service Map</Link></MenuItem>
                 <MenuItem><Link to="/">Manage Reports</Link></MenuItem>
