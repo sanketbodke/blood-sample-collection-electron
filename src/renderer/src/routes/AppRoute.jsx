@@ -15,6 +15,14 @@ import UpdateAgent from "../pages/agent/updateAgent/updateAgent";
 // service map
 import ServiceMap from "../pages/serviceMap/serviceMap";
 
+// schedule appointments
+import ListAppointment from "../pages/patientAppointments/listAppointment/listAppoinment";
+import CreateAppointment from "../pages/patientAppointments/createAppointment/createAppointment";
+import UpdateAppointment from "../pages/patientAppointments/updateAppointment/updateAppointment";
+
+// patient samples
+import PatientSamples from "../pages/patientSamples/listSamples/patientSamples";
+import UpdateSamples from "../pages/patientSamples/updateSamples/updateSamples";
 function AppRoute() {
   return(
     <Routes>
@@ -32,6 +40,13 @@ function AppRoute() {
         <Route path="/agents/edit/:id" element={<UpdateAgent />}/>
 
         <Route path="/service-map" element={<ServiceMap />}/>
+
+        <Route path="/patient/appointments" element={<ListAppointment />}/>
+        <Route path="/patient/appointments/new" element={<CreateAppointment />}/>
+        <Route path="/patient/appointments/edit/:id" element={<UpdateAppointment />}/>
+
+        <Route path="/patient/samples" element={<PatientSamples />}/>
+        <Route path="/patient/samples/edit/:id" element={<UpdateSamples />}/>
       </Route>
     </Routes>
   )

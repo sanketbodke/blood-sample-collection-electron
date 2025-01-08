@@ -5,13 +5,19 @@ export const TableContainer = styled.div`
   height: 100%;
 `
 
+export const TableDataContainer = styled.div`
+  width: 1000px;
+  height: 100%;
+  overflow: scroll;
+`
+
 export const TableStyle = styled.table`
   border-collapse: collapse;
   border-radius: 5px 5px 0 0;
-  overflow: hidden;
-  width: 100%;
+  width: 1300px;
   height: 100%;
   margin: 40px 0;
+  overflow: scroll;
 `
 export const TableHeader = styled.th`
   background-color: var(--primary-color);

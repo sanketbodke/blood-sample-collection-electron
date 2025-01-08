@@ -116,6 +116,103 @@ ipcMain.handle('delete-agent', async (event, { apiToDeleteAgent, token }) => {
   }
 });
 
+// appointment
+
+ipcMain.handle('get-appointments', async (event, { apiToGetAppointments, token }) => {
+  try {
+    const appointments = await axios.get(apiToGetAppointments, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return appointments.data;
+  } catch (error) {
+    console.error("Error to get appointments", error);
+  }
+});
+
+ipcMain.handle('schedule-appointments', async (event, { apiToCreateAppointments, appointmentData ,token }) => {
+  try {
+    const new_appointment = await axios.post(
+      apiToCreateAppointments,
+      appointmentData,
+      {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return new_appointment.data
+  } catch (error) {
+    console.error("Error to schedule appointments", error);
+  }
+});
+
+ipcMain.handle('update-appointment', async (event, { apiToUpdateAppointment, appointmentData, token }) => {
+  try{
+    const updated_appointment = await axios.put(
+      apiToUpdateAppointment,
+      appointmentData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return updated_appointment.data
+  }catch (error){
+    console.log("Error to update appointment", error)
+  }
+})
+
+ipcMain.handle('delete-appointment', async (event, { apiToDeleteAppointment, token }) => {
+  try{
+    const deleted_appointment = await axios.delete(
+      apiToDeleteAppointment,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+  }catch (error){
+    console.log("Error to delete appointment", error)
+  }
+})
+
+// patient samples
+
+ipcMain.handle('get-patient-samples', async (event, { apiToGetPatientSamples, token }) => {
+  try{
+    const samples = await axios.get(apiToGetPatientSamples, {
+      headers:{
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return samples.data
+  }catch (error){
+    console.log("Error to get patient samples")
+  }
+})
+
+// update patient sample status
+ipcMain.handle('update-sample-status', async (event, { apiToUpdateSampleStatus, sampleStatusData, token }) => {
+  try {
+    const updated_status = await axios.put(
+      apiToUpdateSampleStatus,
+      sampleStatusData,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return updated_status.data;
+  } catch (error) {
+    console.error("Error updating status sample:", error);
+  }
+});
+
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.

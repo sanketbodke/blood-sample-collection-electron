@@ -27,7 +27,8 @@ export const FormField = styled.div`
   gap: 10px;
   padding: 10px 0;
 
-  input{
+  input,
+  select{
     width: 300px;
     padding: 10px 5px;
     border-radius: 5px;

@@ -14,6 +14,18 @@ if (process.contextIsolated) {
       createAgent: (apiToCreateAgent, agentData, token) => ipcRenderer.invoke('create-agent', { apiToCreateAgent, agentData ,token }),
       updateAgent: (apiToUpdateAgent, agentData, token) => ipcRenderer.invoke('update-agent', { apiToUpdateAgent, agentData, token }),
       deleteAgent: (apiToDeleteAgent, token) => ipcRenderer.invoke('delete-agent', { apiToDeleteAgent, token }),
+
+      // appointments
+
+      getAppointments: (apiToGetAppointments, token) => ipcRenderer.invoke('get-appointments', { apiToGetAppointments, token }),
+      scheduleAppointment: (apiToCreateAppointments, appointmentData ,token) => ipcRenderer.invoke('schedule-appointments', { apiToCreateAppointments, appointmentData, token }),
+      updateAppointment: (apiToUpdateAppointment, appointmentData, token) => ipcRenderer.invoke('update-appointment', {apiToUpdateAppointment, appointmentData, token}),
+      deleteAppointment: (apiToDeleteAppointment, token) => ipcRenderer.invoke('delete-appointment', {apiToDeleteAppointment, token}),
+
+      // patient samples
+      getPatientSamples: (apiToGetPatientSamples, token) => ipcRenderer.invoke('get-patient-samples', {apiToGetPatientSamples, token}),
+      updateSampleStatus: (apiToUpdateSampleStatus, sampleStatusData, token) => ipcRenderer.invoke('update-sample-status', { apiToUpdateSampleStatus, sampleStatusData, token }),
+
     });
   } catch (error) {
     console.error("Error exposing APIs:", error);

@@ -5,15 +5,16 @@ import {
   TableHeader,
   TableRow,
   SearchAndButtonContainer,
-  ActionButton
+  ActionButton, TableDataContainer
 } from "./table.styled";
 import Button from "../Button/Button.component";
 import { Link } from "react-router-dom";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import useTable from "./useTable";
 import useListAgent from "../../pages/agent/listAgents/useListAgent";
+import useListAppointment from "../../pages/patientAppointments/listAppointment/useListAppointment";
 
-const Table = ({ tableHeaders, tableData }) => {
+const Table = ({ tableHeaders, tableData, dataFor }) => {
   const {
     handleSearch
   } = useTable()
@@ -22,35 +23,103 @@ const Table = ({ tableHeaders, tableData }) => {
     handleDelete
   } = useListAgent()
 
+  const {
+    handleAppointmentDelete
+  } = useListAppointment()
+
   return (
     <TableContainer>
       <SearchAndButtonContainer>
-        <input type="text" placeholder="Search Agent" onChange={handleSearch} />
-        <Button ActionLink="agents/new" ButtonText="Create Agent" />
+        {dataFor === "listAgents" ? (
+          <>
+            <input type="text" placeholder="Search Agent" onChange={handleSearch}/>
+            <Button ActionLink="agents/new" ButtonText="Create Agent"/>
+          </>
+        ) : dataFor === "listAppointments" ?(
+          <>
+            <input type="text" placeholder="Search Appointment" onChange={handleSearch}/>
+            <Button ActionLink="patient/appointments/new" ButtonText="Schedule Appointment"/>
+          </>
+        ) : dataFor === "listSamples" ?(
+          <input type="text" placeholder="Search Samples" onChange={handleSearch}/>
+        ): <></>}
       </SearchAndButtonContainer>
-      <TableStyle className="lab-list-table">
-        <thead>
-        <tr>
-          {tableHeaders.map((header, index) => (
-            <TableHeader key={index}>{header}</TableHeader>
-          ))}
-        </tr>
-        </thead>
-        <tbody>
-        {tableData.map((agent, index) => (
-          <TableRow key={index}>
-            <td>{agent.name}</td>
-            <td>{agent.email}</td>
-            <td>{agent.phone}</td>
-            <td>{agent.address.street}, {agent.address.city}, {agent.address.zip}</td>
-            <ActionButton>
-              <Link to={`/agents/edit/${agent.id}`}><EditOutlined /></Link>
-              <DeleteOutlined onClick={() => handleDelete(agent.id)} />
-            </ActionButton>
-          </TableRow>
-        ))}
-        </tbody>
-      </TableStyle>
+      <TableDataContainer>
+        <TableStyle className="lab-list-table">
+          <thead>
+          <tr>
+            {tableHeaders.map((header, index) => (
+              <TableHeader key={index}>{header}</TableHeader>
+            ))}
+          </tr>
+          </thead>
+          <tbody>
+          {dataFor === "listAgents" ? (
+            <>
+              {tableData.map((agent, index) => (
+                <TableRow key={index}>
+                  <td>{agent.name}</td>
+                  <td>{agent.email}</td>
+                  <td>{agent.phone}</td>
+                  <td>
+                    {agent.address
+                      ? `${agent.address.street}, ${agent.address.city}, ${agent.address.zip}`
+                      : "Address not available"}
+                  </td>
+                  <ActionButton>
+                    <Link to={`/agents/edit/${agent.id}`}>
+                      <EditOutlined />
+                    </Link>
+                    <DeleteOutlined onClick={() => handleDelete(agent.id)} />
+                  </ActionButton>
+                </TableRow>
+              ))}
+            </>
+          ) : dataFor === "listAppointments" ? (
+            <>
+              {tableData.map((appointment, key) => (
+                <TableRow key={key}>
+                  <td>{appointment.id}</td>
+                  <td>{appointment.agent.name}</td>
+                  <td>{appointment.appointment_time}</td>
+                  <td>{appointment.test_type}</td>
+                  <td>{appointment.status}</td>
+                  <td>{appointment.collection_location}</td>
+                  <td>{appointment.note}</td>
+                  <ActionButton>
+                    <Link to={`/patient/appointments/edit/${appointment.id}`}>
+                      <EditOutlined/>
+                    </Link>
+                    <DeleteOutlined onClick={() => handleAppointmentDelete(appointment.id)}/>
+                  </ActionButton>
+                </TableRow>
+              ))}
+            </>
+          ) : dataFor === "listSamples" ?(
+            <>
+              {tableData?.map((appointment, key) => (
+                <TableRow key={key}>
+                  <td>{appointment.id}</td>
+                  <td>{appointment.agent.name}</td>
+                  <td>{appointment.user.user_id}</td>
+                  <td>{appointment.user.first_name} {appointment.user.last_name}</td>
+                  <td>{appointment.appointment_time}</td>
+                  <td>{appointment.test_type}</td>
+                  <td>{appointment.status}</td>
+                  <td>{appointment.collection_location}</td>
+                  <td>{appointment.note}</td>
+                  <ActionButton>
+                    <Link to={`/patient/samples/edit/${appointment.id}`}>
+                      <EditOutlined/>
+                    </Link>
+                  </ActionButton>
+                </TableRow>
+              ))}
+            </>
+          ) : <p><p>No data available</p></p>}
+          </tbody>
+        </TableStyle>
+      </TableDataContainer>
     </TableContainer>
   );
 };
