@@ -23,6 +23,9 @@ import UpdateAppointment from "../pages/patientAppointments/updateAppointment/up
 // patient samples
 import PatientSamples from "../pages/patientSamples/listSamples/patientSamples";
 import UpdateSamples from "../pages/patientSamples/updateSamples/updateSamples";
+
+// reports
+import CreateReport from "../pages/patientReports/createReport/createReport";
 function AppRoute() {
   return(
     <Routes>
@@ -47,6 +50,8 @@ function AppRoute() {
 
         <Route path="/patient/samples" element={<PatientSamples />}/>
         <Route path="/patient/samples/edit/:id" element={<UpdateSamples />}/>
+
+        <Route path="patient/report/create" element={<CreateReport/>} />
       </Route>
     </Routes>
   )

@@ -61,3 +61,8 @@ export const ActionButton = styled.td`
   gap: 10px;
   font-size: var(--medium-text);
 `
+export const PreviewReportButton = styled.button`
+  background-color: var(--white-color);
+  font-size: var(--extra-small-text);
+  cursor: pointer;
+`

@@ -5,7 +5,8 @@ import {
   TableHeader,
   TableRow,
   SearchAndButtonContainer,
-  ActionButton, TableDataContainer
+  ActionButton,
+  TableDataContainer, PreviewReportButton
 } from "./table.styled";
 import Button from "../Button/Button.component";
 import { Link } from "react-router-dom";
@@ -13,10 +14,14 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import useTable from "./useTable";
 import useListAgent from "../../pages/agent/listAgents/useListAgent";
 import useListAppointment from "../../pages/patientAppointments/listAppointment/useListAppointment";
-
+import PdfPreview from "../PdfPreview/PdfPreview.component";
 const Table = ({ tableHeaders, tableData, dataFor }) => {
   const {
-    handleSearch
+    handleSearch,
+    isModalVisible,
+    pdfUrl,
+    showPdfPreview,
+    handleModalClose
   } = useTable()
 
   const {
@@ -86,6 +91,13 @@ const Table = ({ tableHeaders, tableData, dataFor }) => {
                   <td>{appointment.status}</td>
                   <td>{appointment.collection_location}</td>
                   <td>{appointment.note}</td>
+                  <td>
+                    <PreviewReportButton
+                      onClick={() => showPdfPreview(appointment.user?.report_url) || "Report Not Yet Generated"}
+                    >
+                      View
+                    </PreviewReportButton>
+                  </td>
                   <ActionButton>
                     <Link to={`/patient/appointments/edit/${appointment.id}`}>
                       <EditOutlined/>
@@ -95,7 +107,7 @@ const Table = ({ tableHeaders, tableData, dataFor }) => {
                 </TableRow>
               ))}
             </>
-          ) : dataFor === "listSamples" ?(
+          ) : dataFor === "listSamples" ? (
             <>
               {tableData?.map((appointment, key) => (
                 <TableRow key={key}>
@@ -108,6 +120,13 @@ const Table = ({ tableHeaders, tableData, dataFor }) => {
                   <td>{appointment.status}</td>
                   <td>{appointment.collection_location}</td>
                   <td>{appointment.note}</td>
+                  <td>
+                    <PreviewReportButton
+                      onClick={() => showPdfPreview(appointment.user?.report_url)}
+                    >
+                      View
+                    </PreviewReportButton>
+                  </td>
                   <ActionButton>
                     <Link to={`/patient/samples/edit/${appointment.id}`}>
                       <EditOutlined/>
@@ -120,6 +139,11 @@ const Table = ({ tableHeaders, tableData, dataFor }) => {
           </tbody>
         </TableStyle>
       </TableDataContainer>
+      <PdfPreview
+        isVisible={isModalVisible}
+        pdfUrl={pdfUrl}
+        onClose={handleModalClose}
+      />
     </TableContainer>
   );
 };

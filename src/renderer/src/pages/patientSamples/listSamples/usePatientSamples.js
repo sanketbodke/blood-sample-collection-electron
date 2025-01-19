@@ -19,6 +19,7 @@ const usePatientSamples = () => {
     "Status",
     "Location",
     "Notes",
+    "Report",
     "Actions",
   ]);
 

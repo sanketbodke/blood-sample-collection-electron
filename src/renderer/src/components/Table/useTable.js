@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 const useTable = () => {
   const handleSearch = (e) => {
     const searchTerm = e.target.value.toLowerCase();
@@ -8,8 +10,25 @@ const useTable = () => {
     });
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [pdfUrl, setPdfUrl] = useState("");
+
+  const showPdfPreview = (url) => {
+    setPdfUrl(url);
+    setIsModalVisible(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalVisible(false);
+    setPdfUrl("");
+  };
+
   return {
-    handleSearch
+    handleSearch,
+    isModalVisible,
+    pdfUrl,
+    showPdfPreview,
+    handleModalClose
   }
 }
 

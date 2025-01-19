@@ -28,6 +28,9 @@ const apiUrls = {
   getPatientSamples: `${baseUrl}/patient_samples`,
   updateSampleStatus: `${baseUrl}/patient_samples/:id`,
 
+  // generate reports
+  generatePatientReport: `${baseUrl}/patient_reports`
+
 };
 
 export default apiUrls;

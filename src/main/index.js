@@ -16,6 +16,7 @@ function createWindow() {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false,
       contextIsolation: true,
+      webSecurity: false,
     }
   })
 
@@ -212,6 +213,24 @@ ipcMain.handle('update-sample-status', async (event, { apiToUpdateSampleStatus, 
     console.error("Error updating status sample:", error);
   }
 });
+
+// generate patient report
+
+ipcMain.handle('generate-patient-report', async (event, { apiToHandleReport, reportData, token }) => {
+  try{
+    const generated_report = await axios.post(
+      apiToHandleReport,
+      reportData,{
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
+    )
+    return generated_report.data
+  }catch (error){
+    console.error("Error generating report", error)
+  }
+})
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

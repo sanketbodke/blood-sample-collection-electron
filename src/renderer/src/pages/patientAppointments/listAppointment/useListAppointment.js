@@ -19,6 +19,7 @@ const useListAppointment = () => {
     "Status",
     "Location",
     "Notes",
+    "Report",
     "Actions",
   ]);
 

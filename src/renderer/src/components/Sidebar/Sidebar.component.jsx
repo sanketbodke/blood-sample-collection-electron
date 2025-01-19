@@ -49,7 +49,7 @@ const Sidebar= () => {
                 <MenuItem><Link to="/patient/samples">Patient Samples</Link></MenuItem>
                 <MenuItem><Link to="/agents">Manage Agents</Link></MenuItem>
                 <MenuItem><Link to="/service-map">Service Map</Link></MenuItem>
-                <MenuItem><Link to="/">Manage Reports</Link></MenuItem>
+                <MenuItem><Link to="/patient/report/create">Manage Reports</Link></MenuItem>
               </>
             )}
           </MenuItems>

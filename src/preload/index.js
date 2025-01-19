@@ -26,6 +26,9 @@ if (process.contextIsolated) {
       getPatientSamples: (apiToGetPatientSamples, token) => ipcRenderer.invoke('get-patient-samples', {apiToGetPatientSamples, token}),
       updateSampleStatus: (apiToUpdateSampleStatus, sampleStatusData, token) => ipcRenderer.invoke('update-sample-status', { apiToUpdateSampleStatus, sampleStatusData, token }),
 
+      // patient report
+      generatePatientReport: (apiToHandleReport, reportData, token) => ipcRenderer.invoke('generate-patient-report', { apiToHandleReport, reportData, token })
+
     });
   } catch (error) {
     console.error("Error exposing APIs:", error);
